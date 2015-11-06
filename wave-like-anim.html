@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
+	<meta http-equiv ="Content-Type" content="text/html; charset=utf-8" />
+	<style>
+		/*初始化样式*/
+		html,body{font:14px '微软雅黑';height: 100%;width: 100%;padding: 0;margin: 0;overflow: hidden; color: #424242;}
+		button,input{border-style: none;font:14px '微软雅黑';outline:none;}
+
+		/*此组为padding公共样式类*/
+		.sPadding{padding: 8px;}
+		.lPadding{padding: 16px;}
+		/*此组为颜色公共类*/
+		.gray{background-color: #eeeeee;color: #424242;}
+		.green{background-color: #009688;color: white;}
+		.greenDark{background-color: #00796b;color: white;}
+		/*浮动按钮样式*/
+		.float{border-radius: 2px;box-shadow: 0px 1px 2px rgba(0,0,0,0.24);cursor: pointer;}
+		.hLayout{display: inline-block; vertical-align: top;}
+		/*uderline*/
+		.underline{ border-bottom: 1px solid #e0e0e0;}
+		.header{height: 1.5em;font-size: 1.5em;line-height: 1.5em;}
+		.container{width: 40%;height: 100%}
+		.content{position: relative;}
+		.comment{box-sizing:border-box;width: 100%; height: 8em;}
+		.action{text-align: right;}
+		.left{
+			width: 80px;
+			display: inline-block;
+		}
+		.right{
+			box-sizing:border-box;
+			position: absolute;
+			padding-left: 96px;
+			text-align: left;
+			top: 0;
+			left: 0;
+			right: 32px;
+			cursor: pointer;
+		}
+		.item{
+			height: 48px;
+			position: relative;
+		}
+		.img{
+			display: inline-block;
+			height: 48px;
+			width: 48px;
+			line-height: 48px;
+			border-radius: 24px;
+			text-align: center;
+		}
+		.image{
+			position: relative;
+		}
+		.mask{
+			height: 280px;
+			width: 100%;
+			position: absolute;
+			top: 0;
+		}
+		.cover{
+			height: 280px;
+			width: 100%;
+			background-position: center;
+			background-size: cover;
+		}
+		.text{
+			height: 80px;
+			line-height: 80px;
+		}
+		.btn{
+			width: 168px;
+			display: inline-block;
+			line-height: 100%;
+			text-align: center;
+			margin-left: 32px;
+		}
+		.gift{cursor: pointer;
+			float: left;
+			text-align: center;
+			width: 10%;
+			height: 48px;
+			border-radius: 24px;
+		}
+		.icon{line-height: 48px; font-size: 24px;}
+		.icon_heart{line-height: 48px; font-size: 16px;}
+		.static{width: 10%;line-height: 48px;text-align: center;}
+		.textInput{
+			box-sizing:border-box;
+			border-bottom: 1px solid #e0e0e0;
+			border-radius: 2px;
+			height: 48px;
+			width: 60%;
+		}
+		.textInput:focus{border-bottom: 1px solid #009688;}
+		.info{
+			position: absolute;
+			right: 36px;
+			top:32px;
+			height: 24px;
+			width:24px;
+			font-size: 16px;
+			text-align: center;
+		}
+		.action{
+			line-height: 24px;
+		}
+		.action:hover{
+			color: #009688;
+			cursor: pointer;
+		}
+		.wave-anim-grayLight{-webkit-animation: wave-anim-grayLight 0.2s ease;}
+		.wave-anim-grayBig{-webkit-animation: wave-anim-grayBig 0.2s ease;}
+		.wave-anim-greenLite{-webkit-animation: wave-anim-greenLite 0.2s ease;}
+		.like-anim{-webkit-animation: like-anim 0.2s ease;}
+		.like-anim-flip{-webkit-animation: like-anim-flip 0.2s ease;}
+		.arc-in-anim{-webkit-animation: arc-in-anim 0.2s ease;}
+		.arc-out-anim{-webkit-animation: arc-out-anim 0.2s ease;}
+		@-webkit-keyframes wave-anim-greenLite { 
+		    0% { 
+		    	background-image: radial-gradient(8px at center, #00897b 50%,#009688 55%);
+				box-shadow: 0px 1px 2px rgba(0,0,0,0.24);
+		    } 
+		    25% { 
+		    	background-image: radial-gradient(56px at center, #00897b 50%,#009688 55%);
+				box-shadow: 0px 3px 3px rgba(0,0,0,0.24);
+		    } 
+		    50% {
+		     background-image: radial-gradient(112px at center, #00897b 50%,#009688 55%);
+				box-shadow: 0px 3px 6px rgba(0,0,0,0.24);
+		 	} 
+		 	75% {
+		     	background-image: radial-gradient(140px at center, #00897b 50%,#009688 55%);
+				box-shadow: 0px 2px 2px rgba(0,0,0,0.24);
+		 	} 
+		    100% {
+		     background-image: radial-gradient(168px at center, #00897b 50%,#009688 55%);
+				box-shadow: 0px 1px 2px rgba(0,0,0,0.24);
+		 } 
+		}
+		@-webkit-keyframes wave-anim-grayLight { 
+		    0% { 
+		    	background-image: radial-gradient(8px at center, #e0e0e0 50%,#eeeeee 55%);
+				box-shadow: 0px 1px 2px rgba(0,0,0,0.24);
+		    } 
+		    25% { 
+		    	background-image: radial-gradient(56px at center, #e0e0e0 50%,#eeeeee 55%);
+				box-shadow: 0px 3px 3px rgba(0,0,0,0.24);
+		    } 
+		    50% {
+		     background-image: radial-gradient(112px at center, #e0e0e0 50%,#eeeeee 55%);
+				box-shadow: 0px 3px 6px rgba(0,0,0,0.24);
+		 	} 
+		 	75% {
+		     background-image: radial-gradient(140px at center, #e5e5e5 50%,#eeeeee 55%);
+				box-shadow: 0px 2px 2px rgba(0,0,0,0.24);
+		 	} 
+		    100% {
+		     background-image: radial-gradient(168px at center, #eaeaea 50%,#eeeeee 55%);
+				box-shadow: 0px 1px 2px rgba(0,0,0,0.24);
+		 } 
+		}
+		@-webkit-keyframes wave-anim-grayBig {
+		    0% {background-image: radial-gradient(112px circle at center, #eee 50%,transparent 55%);} 
+		    25% {background-image: radial-gradient(280px circle at center, #eee 50%,transparent 54%);} 
+		    50% {background-image: radial-gradient(320px circle at center, #eee 50%,transparent 53%);} 
+		 	75% {background-image: radial-gradient(390px circle at center, #f5f5f5 50%,transparent 52%);} 
+		    100% {background-image: radial-gradient(460px circle at center, #fafafa 50%,transparent 51%);} 
+		}
+		@-webkit-keyframes like-anim { 
+		    0% {background-image: radial-gradient(4px circle at center, #eee 50%,transparent 55%);color: #bf360c;} 
+		    25% {background-image: radial-gradient(24px circle at center, #eee 50%,transparent 55%);color: #e64a09;} 
+		    50% {background-image: radial-gradient(32px circle at center, #eee 50%,transparent 55%);color: #ff5722;} 
+		 	75% {background-image: radial-gradient(36px circle at center, #f5f5f5 50%,transparent 55%);color: #ff5722;} 
+		    100% {background-image: radial-gradient(40px circle at center, #fafafa 50%,transparent 55%);color: #ff5722;} 
+		}
+		@-webkit-keyframes like-anim-flip { 
+		    0% {background-image: radial-gradient(4px circle at center, #eee 50%,transparent 55%);color: #ff5722;} 
+		    25% {background-image: radial-gradient(24px circle at center, #eee 50%,transparent 55%);color: #ff5722;} 
+		    50% {background-image: radial-gradient(32px circle at center, #eee 50%,transparent 55%);color: #e64a09;} 
+		 	75% {background-image: radial-gradient(36px circle at center, #f5f5f5 50%,transparent 55%);color: #bf360c;} 
+		    100% {background-image: radial-gradient(40px circle at center, #fafafa 50%,transparent 55%);color: #bf360c;} 
+		}
+		@-webkit-keyframes arc-in-anim {
+			0% { -webkit-transform: rotateZ(75deg)  translateY(30px) scale(0.5);}
+			100% { -webkit-transform: rotateZ(0deg)  translateY(0px) scale(1);}
+		}
+		@-webkit-keyframes arc-out-anim {
+			0% { -webkit-transform: rotateZ(-75deg)  translateY(-30px) scale(0.5);}
+			100% { -webkit-transform: rotateZ(0deg)  translateY(0px) scale(1);}
+		}
+	</style>
+</head>
+<body oncontextmenu="return false;" onselectstart="return false">
+	<div class='container'>
+		<header class='header greenDark lPadding'>Header</header>
+		<section class='image'>
+			<div class='cover'></div>
+			<div class='mask green'></div>
+		</section>
+		<section class='content'>
+			<div class="item lPadding " onclick="animateThis(this,'wave-anim-grayBig',200)">
+				<aside class="left">
+					<div class='img green'><i class="fa fa-user icon"></i></div>
+				</aside><!--
+			 --><aside class="right">
+			 		<div class='text underline'>天地昏黄</div>
+			 	</aside>
+			 	<div class='info'><i class="fa fa-send action"></i></div>
+			</div>
+			<div class="item lPadding " onclick="animateThis(this,'wave-anim-grayBig',200)">
+				<aside class="left">
+					<div class='img green'><i class="fa fa-user icon"></i></div>
+				</aside><!--
+			 --><aside class="right">
+			 		<div class='text underline'>天地昏黄</div>
+			 	</aside>
+			 	<div class='info'><i class="fa fa-send action"></i></div>
+			</div>
+			<div class="item lPadding " onclick="animateThis(this,'wave-anim-grayBig',200)">
+				<aside class="left">
+					<div class='img green'><i class="fa fa-user icon"></i></div>
+				</aside><!--
+			 --><aside class="right">
+			 		<div class='text underline'>天地昏黄</div>
+			 	</aside>
+			 	<div class='info'><i class="fa fa-send action"></i></div>
+			</div>
+			<div class="item lPadding " onclick="animateThis(this,'wave-anim-grayBig',200)">
+				<aside class="left">
+					<div class='img green'><i class="fa fa-user icon"></i></div>
+				</aside><!--
+			 --><aside class="right">
+			 		<div class='text underline'>天地昏黄</div>
+			 	</aside>
+			 	<div class='info'><i class="fa fa-send action"></i></div>
+			</div>
+		</section>
+
+		<section class='comment lPadding'>
+			<span class='gift hLayout float'>
+				<i class="fa fa-heart icon_heart"></i>
+			</span><!--
+		 --><span class='static hLayout'>26</span>
+		</section>
+
+		<section class='action lPadding'>
+			<button type='submit' class="btn gray float lPadding">取消</button>
+			<button type='submit' class='btn green float lPadding'>提交</button>
+		</section>
+	</div>
+</body>
+
+<script>
+	function animateThis(obj,animateClass,time){
+	    var cls=obj.className;
+	    obj.className=cls+' '+animateClass;
+	    setTimeout(function(){
+	        obj.className=cls;
+	    }, time);
+	}
+  	var btn1=document.getElementsByTagName('button')[0];
+  	var btn2=document.getElementsByTagName('button')[1];
+  	var likeBtn=document.getElementsByClassName('gift')[0];
+  	btn1.onclick=function(){animateThis(btn1,'wave-anim-grayLight',200);}
+  	btn2.onclick=function(){animateThis(btn2,'wave-anim-greenLite',200);}
+	likeBtn.onclick=function(){like(likeBtn);}
+
+	var state=false;
+	function like(obj){
+		if (!state){
+			animateThis(obj,'like-anim',200);
+			animateThis(document.getElementsByClassName('static')[0],'arc-in-anim',200);
+			obj.style.color='#ff5722';
+			var num=document.getElementsByClassName('static')[0];
+			num.style.color="#ff5722";
+			num.innerHTML=parseInt(num.innerHTML)+1;
+			state=!state;
+		}else{
+			animateThis(obj,'like-anim-flip',200);
+			animateThis(document.getElementsByClassName('static')[0],'arc-out-anim',200);
+			obj.style.color='#424242';
+			var num=document.getElementsByClassName('static')[0];
+			document.getElementsByClassName('static')[0].style.color="#424242";
+			num.innerHTML=parseInt(num.innerHTML)-1;
+			state=!state;
+		};
+	}
+</script>
+</html>

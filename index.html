@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="./css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/initial.css">
+
+
+<div class="appBar">
+	<div class="appBarContainer">
+		<div class="title">
+			<span class='backBtn'  onclick="animateThis(this,'wave-anim-grayBig',200);history.go(-1);"> <i class="fa  fa-arrow-left"></i>
+			</span>
+			<span>timAnim动画类库</span>
+		</div>
+	</div>
+</div>
+
+<div class='container'  oncontextmenu="return false;" onselectstart="return false">
+	<div class="intro float">
+		<div class="moreBtn float" spellcheck='true' onclick="switchIntro(this);">使用</div>
+		<div class="introTitle">如何在我的项目中使用timAnim</div>
+		<span class='jsquot'>
+			<title>Html类名引用</title>
+			<p>如果动画无需触发，只在加载的时候显示，则可以通过类名的方式引用：</br>
+				&lt;div class='wave-anim-bright'&gt;</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;i class='fa fa-refresh'&gt;&lt;/i&gt;</br>
+				&lt;/div&gt;
+			</p>
+			<title>通过keyframes关键帧方式引用</title>
+			<p>
+				如需伪类触发（例如hover），则可以通过引用动画引用：</br>
+				.btn:hover{animation: o-anim-flip 0.2s ease;}。</br></br>
+
+			</p>
+
+		</span><!-- 
+		 --><span class='jsquot'>
+			<title>如需事件触发则可通过js引用</title>
+			<p>
+				&lt;div onclick='animateThis(this,'o-anim',200)'&gt;</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&lt;i class='fa fa-ellipsis-h'&gt;&lt;/i&gt;</br>
+				&lt;/div&gt;
+			</p>
+			<p>	</br>function animateThis(obj,animateClass,time){</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;var cls=obj.className;</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;obj.className=cls+' '+animateClass;</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(function(){</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.className=cls;</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;}, time);</br>
+				}
+			</p>
+		</span>
+	</div>	
+	<aside>
+		<article class='animHolder wave-anim-big-holder' onclick="animateThis(this,'wave-anim-grayBig',200)">
+			<div class="item ">
+				<div class="left">
+					<div class='img green'><i class="fa fa-user icon"></i></div>
+				</div>
+				<div class="right">
+			 		<div class='text'>点击卡片</div>
+			 	</div>
+			 	<div class='info'><i class="fa fa-send action"></i></div>
+			</div>
+		</article>
+		<article class="animHolder o-anim-holder" id='o-anim-holder'>
+			<div class="o-btn float" id='o-btn' checked='' onclick="animateThis(this,'o-anim',200);showFloatPanel(this);"><i class="fa fa-ellipsis-h"></i></div>
+			<div class="floatPanel float" onclick="hideFloatPanel(this)">点我关闭</div>
+		</article>
+	</aside><!-- 
+	 --><aside class="rightPortion">
+		<article class='animHolder arc-anim-holder'>
+			<span class='float' id='likeBtn' spellcheck='false' onclick='like(this);'>
+				<i class="fa fa-heart icon_heart"></i>
+			</span>
+			<span class='static'>26</span>
+		</article>
+		<article class='animHolder wave-anim-holder'>
+			<button class="btn gray float" onclick="animateThis(this,'wave-anim-grayLight',200);">取消</button>
+			<button class='btn green float' onclick="animateThis(this,'wave-anim-greenLite',200);">提交</button>
+		</article>
+		<article class='animHolder sequen-anim-holder'>
+			<title class='sequenItem'>点击右侧按钮</title>
+			<div class="order1 sequenItem">序列1</div>
+			<div class="order2 sequenItem">序列2</div>
+			<div class="order3 sequenItem">序列3</div>
+			<div class="order4 sequenItem">序列4</div>
+			<div class="order5 sequenItem">序列5</div>
+			<div class="order6 sequenItem">序列6</div>
+			<button class="sequenCtrl float green" onclick="refreshThis(this)"><i class="fa fa-refresh"></i></button>
+		</article>
+	</aside>
+    <div class="footer">©2015 Weavent 意见反馈 粤ICP备15035267号</div>
+
+</div>
+
+<script>
+	function animateThis(obj,animateClass,time){
+	    var cls=obj.className;
+	    obj.className=cls+' '+animateClass;
+	    setTimeout(function(){
+	        obj.className=cls;
+	    }, time);
+	}
+
+	var state=false;
+	function like(obj){
+		if (!state){
+			animateThis(obj,'like-anim',200);
+			animateThis(document.getElementsByClassName('static')[0],'arc-in-anim',200);
+			obj.style.color='#ff5722';
+			var num=document.getElementsByClassName('static')[0];
+			num.style.color="#ff5722";
+			num.innerHTML=parseInt(num.innerHTML)+1;
+			state=!state;
+		}else{
+			animateThis(obj,'like-anim-flip',200);
+			animateThis(document.getElementsByClassName('static')[0],'arc-out-anim',200);
+			obj.style.color='#424242';
+			var num=document.getElementsByClassName('static')[0];
+			document.getElementsByClassName('static')[0].style.color="#424242";
+			num.innerHTML=parseInt(num.innerHTML)-1;
+			state=!state;
+		};
+	}
+
+	function showFloatPanel(oBtn){
+		document.getElementById('o-anim-holder').style.backgroundColor='#616161';
+		oBtn.setAttribute('checked','checked');
+	}
+	function hideFloatPanel(bg){
+		document.getElementById('o-anim-holder').style.backgroundColor='#fafafa';
+		var oBtn=document.getElementById('o-btn');
+		oBtn.setAttribute('checked','');
+		animateThis(oBtn,'o-anim-flip',100);
+	}
+
+	function refreshThis(btn){
+		var items=btn.parentNode.getElementsByTagName('div');
+		for (var i = 5; i >= 0; i--) {
+			items[i].style.display='none';
+		};
+		setTimeout(function(){
+			for (var i = 5; i >= 0; i--) {
+				items[i].style.display='block';
+			};
+		},200);
+	}
+
+	function switchIntro(moreBtn){
+		moreBtn.spellcheck=!moreBtn.spellcheck;
+	}
+</script>

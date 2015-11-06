@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>html2canvas网页截图</title>
+	<script src="./js/jquery-1.8.3.min.js"></script>
+	<script src="./js/html2canvas.js"></script>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
+	<link rel="stylesheet" href="./css/initial.css">
+	<style>
+		body,html{
+			height: 100%;
+			overflow: hidden;
+			padding: 0;
+			margin: 0;
+			background-color: white;
+		}
+		.old{
+			background-color: #009688;
+			height: 10em;
+			color: white;
+			line-height: 10em;
+		}
+		.newImgl{
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			display: block;
+			z-index: 5000;
+			animation:slide-anim 0.6s linear;
+		}
+
+		.transBg{
+			height: 100%;
+			width:100%;
+			background-color: #424242;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 10;
+		}
+		#down_button{
+			display: inline-block;
+			cursor: pointer;
+			height: 2.5em;
+			width: 8em;
+			line-height: 2.5em;
+			background-color: #e0e0e0;
+			border-radius: 2px;
+			text-align: center;
+			float: right;
+			margin:2em 1em 0 0;
+		}
+
+		#load_content{
+		    position: absolute;
+		    top:0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    z-index: 11;
+		    display: none;
+		    background-color: white;
+		}
+
+		@keyframes slide-anim{
+			0%{
+                transform:scale(1) translateY(0);
+			}
+			10%{
+                transform:scale(0.7) translateY(0);
+			}
+			50%{
+                transform:scale(0.7) translateY(0);
+			}
+			100%{
+                transform:scale(0.5) translateY(-1000px);
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class='old'>此网页演示了html2canvas截图后将截图后的网页追加到了原网页之上</div>
+	<a type="button" id="down_button" onclick="trans('http://weavent.com/tim/timanim/index.php')">转换</a>
+</body>
+
+<script>
+    function trans(url){
+        html2canvas(document.body, {
+            allowTaint: true,
+            taintTest: false,
+            onrendered: function(canvas) {
+                //初始化对象并加到body
+                var dataUrl = canvas.toDataURL();
+                var newImgl = document.createElement("img");
+                var transBg = document.createElement("div");
+
+                transBg.className='transBg';
+                newImgl.className='newImgl';
+                newImgl.src =  dataUrl;
+
+                document.body.appendChild(newImgl);
+                document.body.appendChild(transBg);
+                console.log("切换中");
+    			        //异步加载页面
+		        var newHtml=document.createElement("div");
+		        console.log("正在加载...");
+		        $(newHtml).load(url, function(responseText, textStatus, XMLHttpRequest) {
+		            if (textStatus == "error") {
+		                var msg = "错误: ";
+		                console.log(msg + XMLHttpRequest.status + " " + XMLHttpRequest.statusText);
+		            }
+		            else if (textStatus == "timeout") {
+		                var msg = "操时: ";
+		                console.log(msg + XMLHttpRequest.status + " " + XMLHttpRequest.statusText);
+		            }
+		            else {
+		                console.log("加载完成");
+		                 setTimeout(function(){
+		                    console.log("显示出来");
+		                    document.body.innerHTML='';
+		                    $('body').append(newHtml);
+		                },600);
+		            }
+		        });
+            }
+        });
+    }
+</script>
+
+</html>

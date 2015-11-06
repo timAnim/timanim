@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<title>JQuery - Load</title>
+<meta http-equiv="Access-Control-Allow-Origin" content="*">
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="./css/font-awesome.min.css">
+<link rel="stylesheet" href="./css/initial.css">
+<script src="./js/jquery-1.8.3.min.js"></script>
+<style type="text/css">
+	#header{
+        margin-bottom: 1em;
+        padding-bottom: 1em;
+        border-bottom: 1px solid #eee;
+    }
+    .buttonListArea
+    {
+        float: left;
+        width: 150px;
+        padding-right: 10px;
+        border-right: 1px solid #eee;
+        margin-right: 10px;
+    }
+    .button{
+         cursor:pointer;
+         position: absolute;
+         z-index: 200;
+        }
+    
+    .buttonArea
+    {
+        margin: 10px;
+        padding-bottom: 20px;
+    }
+    #load_content{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<form id="form1" runat="server">
+<div id="container">
+    <div id="header">
+        <h2>加载演示</h2>
+    </div>
+    <div class="buttonListArea">
+        <div class="buttonArea">
+            <div class="button"  id="btnLoad1"> Load 1</div>
+        </div>
+    </div>
+    <div id="load_content">
+    </div>
+</div>
+</form>
+
+<script>
+   $(document).ready(function() {
+        $('#btnLoad1.button').click(function() {
+            $('#header').html("正在加载...");
+            //$('#load_content').load('http://jqueryui.com/', );
+            $('#load_content').hide().load('http://weavent.com/tim/timanim/index.php', function(responseText, textStatus, XMLHttpRequest) {
+                //所有状态成功，执行此函数，显示数据  //textStatus四种状态 success、error、notmodified、timeout
+                if (textStatus == "error") {
+                    var msg = "错误: ";
+                    $('#header').html(msg + XMLHttpRequest.status + " " + XMLHttpRequest.statusText);
+                }
+                else if (textStatus == "timeout") {
+                    var msg = "操时: ";
+                    $('#header').html(msg + XMLHttpRequest.status + " " + XMLHttpRequest.statusText);
+                }
+                else {
+                    $('#header').html("加载完成");
+                    $(this).fadeIn();
+                }
+            });
+        });
+    });
+</script>
+
+
